@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- v-on:click ==> @click -->
+        <!-- <h1 v-text="msg" @click="handleClick"></h1> -->
+        <!-- v-bind: == : -->
+        <div :title="title">hello world</div>
+        <input v-model="msg"/>
+        <div v-text="msg"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+            //template:'<h1>hello</h1>',
+            data: {
+                msg: " content",
+                title:"this is title"
+            },
+            methods: {
+                handleClick: function () {
+                    this.msg="changed"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
