@@ -3,31 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Vue</title>
+    <title>ToDoList</title>
     <script src="./vue.js"></script>
 </head>
 
 <body>
     <div id="root">
-        <!-- v-on:click ==> @click -->
-        <!-- <h1 v-text="msg" @click="handleClick"></h1> -->
-        <!-- v-bind: == : -->
-        <div :title="title">hello world</div>
-        <input v-model="msg"/>
-        <div v-text="msg"></div>
+        <div>
+            <input v-model="inputValue" />
+            <button @click="handelClick">submit</button>
+        </div>
+        <ul>
+            <todo-item v-for="(item,index) of list" 
+            :key="index" 
+            :content="item"
+            :index="index"
+            @delete="handelDelete"></todo-item>
+        </ul>
     </div>
 
     <script>
+        Vue.component('todo-item', {
+            props: ['content','index'],
+            template: '<li @click="click()">{{content}}</li>',
+            methods: {
+                click: function () {
+                   this.$emit('delete',this.index)
+                }
+            }
+        })
+
+
+
+        // var TodoItem = {
+        //     template: "<li>{{item}}</li>"
+        // }
         new Vue({
-            el: "#root",
-            //template:'<h1>hello</h1>',
+            el: '#root',
+            // components: {
+            //     'todo-item': TodoItem
+            // },
             data: {
-                msg: " content",
-                title:"this is title"
+                inputValue: "",
+                list: []
             },
             methods: {
-                handleClick: function () {
-                    this.msg="changed"
+                handelClick: function () {
+                    this.list.push(this.inputValue)
+                    this.inputValue = null
+                },
+                handelDelete:function(e){
+                    this.list.splice(e,1)
                 }
             }
         })
