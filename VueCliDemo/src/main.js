@@ -5,7 +5,8 @@ import App from './App'
 import router from './router'
 import ToDoList from './ToDoList'
 Vue.config.productionTip = false
-
+// eslint-disable-next-line to ignore the next line.
+/* eslint-disable */ 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
