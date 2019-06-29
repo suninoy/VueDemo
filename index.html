@@ -33,7 +33,7 @@
             }
         })
 
-
+ 
 
         // var TodoItem = {
         //     template: "<li>{{item}}</li>"
@@ -45,7 +45,7 @@
             // },
             data: {
                 inputValue: "",
-                list: []
+                list: [] 
             },
             methods: {
                 handelClick: function () {
@@ -55,15 +55,15 @@
                 handelDelete:function(e){
                     this.list.splice(e,1)
                 }
-            }
+            },
+            mounted() {
+                
+            },
+            created() {
+                
+            },
+            
         })
-
-
-
-        String.prototype.reverse = function(str){
-            return str.split("").reverse().join('');
-
-        }
     </script>
 </body>
 
