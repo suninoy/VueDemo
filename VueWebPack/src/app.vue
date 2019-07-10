@@ -1,44 +1,32 @@
 <template>
-    <el-container>
-        <el-header>
-            <mainMenu></mainMenu>
-        </el-header>
-        <el-main><router-view/></el-main>
-        <el-footer></el-footer>
-    </el-container>
+  <div>
+    <mainMenu></mainMenu>
+    <todo class="todo"></todo>
+  </div>
+
 
 </template>
 
 <script>
-    import eChartDemo from './components/eChartDemo.vue';
-    import mainMenu from './components/mainMenu.vue'
-    export default {
-        components: {
-            mainMenu,eChartDemo
-        }
-
+  import eChartDemo from './eChartDemo.vue'
+  import mainMenu from './mainMenu.vue'
+  import flexPage from './flexPage.vue'
+  import todo from './todo.vue'
+  export default {
+    components: {
+      mainMenu,
+      eChartDemo,
+      flexPage,
+      todo
     }
+
+  }
 </script>
 
 <style scoped>
-    .el-header,
-    .el-footer {
-        background-color: #B3C0D1;
-        color: #333;
-        text-align: center;
-        line-height: 60px;
-    }
-
-
-
-    .el-main {
-        background-color: #E9EEF3;
-        color: #333;
-        text-align: center;
-        line-height:600px
-    }
-
-    body>.el-container {
-        margin-bottom: 40px;
-    }
+ .todo{  
+  width: 600px;
+  margin: 0 auto ;
+  box-shadow: 0 0 5px #666
+ }
 </style>

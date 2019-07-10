@@ -62,8 +62,8 @@ const config= {
 if(isDev){
  config.devtool = '#cheap-module-eval-source-map',//映射vue文件代码
  config.devServer = {
-     port:'8083',
-     host:'localhost',//如果设置成localhost 则无法通过IP访问
+     port:'8080',
+     host:'0.0.0.0',//如果设置成localhost 则无法通过IP访问
     //  overlay:{
     //      //编译过程中出错显示在网页上
     //      errors:true,

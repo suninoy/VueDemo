@@ -14,8 +14,8 @@ Vue.use(ElementUI);
 Vue.prototype.echarts = echarts 
 
 
-// const root = document.createElement('div')
-// document.body.appendChild(root)
+const root = document.createElement('div')
+document.body.appendChild(root)
 
 // new Vue({
 //   el: '#app',
@@ -24,4 +24,4 @@ Vue.prototype.echarts = echarts
 new Vue({
     router,
     render:(h)=>h(App)
-}).$mount()
+}).$mount(root)
