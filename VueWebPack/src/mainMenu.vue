@@ -7,7 +7,7 @@
                     <template slot="title">我的工作台</template>
                     <el-menu-item index="2-1"><router-link :to="{name:'echart',params:{Id:1}}">echart图</router-link></el-menu-item>
                     <el-menu-item index="2-2"><router-link :to="{name:'flexPage',params:{Id:2}}">flexPage</router-link></el-menu-item>
-                    <el-menu-item index="2-3">选项3</el-menu-item>
+                    <el-menu-item index="2-3"><router-link :to="{name:'three',params:{Id:1}}">threeDemo</router-link></el-menu-item>
                     <el-submenu index="2-4">
                         <template slot="title">选项4</template>
                         <el-menu-item index="2-4-1">选项1</el-menu-item>

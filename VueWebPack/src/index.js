@@ -7,12 +7,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/styles/test.css'
 import './assets/images/bg.jpg'
 import './assets/styles/test-stylus.styl'
-import router from './router.js'
+import router from './router.js';
+import three from 'three.js';
 
 Vue.use(VueRouter)
 Vue.use(ElementUI);
-Vue.prototype.echarts = echarts 
-
+Vue.prototype.echarts = echarts ;
+Vue.prototype.three = three;
+console.log(three)
 
 const root = document.createElement('div')
 document.body.appendChild(root)

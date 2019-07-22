@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js --open"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "three.js": "^0.77.1",
     "url-loader": "^1.1.2",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",

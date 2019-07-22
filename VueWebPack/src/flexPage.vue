@@ -1,10 +1,14 @@
 <template>
-
+    <todo class="todo"></todo>
 </template>
 
 <script>
-
-
+  import todo from './todo.vue'
+  export default {
+    components: {
+      todo
+    }
+    }
 
 </script>
 
@@ -35,4 +39,9 @@
     padding: 10px 0;
     background-color: #f9fafc;
   }
+   .todo{  
+  width: 600px;
+  margin: 0 auto ;
+  box-shadow: 0 0 5px #666
+ }
 </style>

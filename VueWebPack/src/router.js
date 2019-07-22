@@ -1,6 +1,7 @@
 import eChartDemo from './eChartDemo.vue'
 import flexPage from './flexPage.vue'
 import VueRouter from 'vue-router'
+import three from './three.vue'
 
 const routes = [{
     path: '/echart/:Id',
@@ -10,6 +11,10 @@ const routes = [{
     path: '/flexPage/:Id',
     name:'flexPage',
     component: flexPage
+} ,{
+    path: '/three/:Id',
+    name:'three',
+    component: three
 } ]
 
 const router = new VueRouter({
