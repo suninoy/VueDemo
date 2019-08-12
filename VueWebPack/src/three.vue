@@ -1,5 +1,5 @@
 <template>
-<div id="canvasFrame"></div>
+    <div id="canvas-frame" style="height:800px;width:100%"></div>
 </template>
 
 <script>
@@ -7,88 +7,122 @@
 
         data() {
             return {
-
-renderer;
+                scene: null,
+                renderer: null,
+                camera: null,
+                count:0,
             }
         },
         mounted() {
-           threeStart();
+            this.initThree();
+            this.initCamera();
+            this.initScene();
+            this.initLight();
+            this.initObject();
+           // this.render();
+            this.animation();
         },
         destroyed() {
-            document.body.remove(document.getElementById('canvas-frame'))
+
         },
         methods: {
- 
-             initThree() {
-                width = document.getElementById('canvas-frame').clientWidth;
-                height = document.getElementById('canvas-frame').clientHeight;
-                renderer = new THREE.WebGLRenderer({
-                    antialias : true
+
+            initThree() {
+                var width = document.getElementById('canvas-frame').clientWidth;
+                var height = document.getElementById('canvas-frame').clientHeight;
+                this.renderer = new this.three.WebGLRenderer({
+                    antialias: true
                 });
-                renderer.setSize(width, height);
-                document.getElementById('canvas-frame').appendChild(renderer.domElement);
-                renderer.setClearColor(0xFFFFFF, 1.0);
-            }
+                this.renderer.setSize(width, height);
+                document.getElementById('canvas-frame').appendChild(this.renderer.domElement);
+                this.renderer.setClearColor(0xFFFFFF, 1.0);
+                //                 stats = new Stats();
+                // stats.domElement.style.position = 'absolute';
+                // stats.domElement.style.left = '0px';
+                // stats.domElement.style.top = '0px';
+            },
 
-            var camera;
-             initCamera() {
-                camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-                camera.position.x = 0;
-                camera.position.y = 1000;
-                camera.position.z = 0;
-                camera.up.x = 0;
-                camera.up.y = 0;
-                camera.up.z = 1;
-                camera.lookAt({
-                    x : 0,
-                    y : 0,
-                    z : 0
+
+            initCamera() {
+
+                var width = document.getElementById('canvas-frame').clientWidth;
+                var height = document.getElementById('canvas-frame').clientHeight;
+                this.camera = new this.three.PerspectiveCamera(45, width / height, 1, 10000);
+                this.camera.position.x = 0;
+                this.camera.position.y = 1000;
+                this.camera.position.z = 0;
+                this.camera.up.x = 0;
+                this.camera.up.y = 0;
+                this.camera.up.z = 1;
+                this.camera.lookAt({
+                    x: 0,
+                    y: 0,
+                    z: 0
                 });
-            }
+            },
 
-            var scene;
-             initScene() {
-                scene = new THREE.Scene();
-            }
 
-            var light;
-             initLight() {
-                light = new THREE.DirectionalLight(0xFF0000, 1.0, 0);
+            initScene() {
+                this.scene = new this.three.Scene();
+            },
+
+
+            initLight() {
+                var light;
+                light = new this.three.DirectionalLight(0xFF0000, 1.0, 0);
                 light.position.set(100, 100, 200);
-                scene.add(light);
-            }
+                this.scene.add(light);
+            },
 
-            var cube;
-             initObject() {
 
-                var geometry = new THREE.Geometry();
-                var material = new THREE.LineBasicMaterial( { vertexColors: THREE.VertexColors} );
-                var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
+            initObject() {
+                // var cube;
+                // //定义几何体
+                // var geometry = new this.three.Geometry();
+                // // B begin
+                // geometry.vertices.push(new this.three.Vector3(-500, 0, 0));
+                // geometry.vertices.push(new this.three.Vector3(500, 0, 0));
+                // for (var i = 0; i <= 20; i++) {
 
-                // 线的材质可以由2点的颜色决定
-                var p1 = new THREE.Vector3( -100, 0, 100 );
-                var p2 = new THREE.Vector3(  100, 0, -100 );
-                geometry.vertices.push(p1);
-                geometry.vertices.push(p2);
-                geometry.colors.push( color1, color2 );
+                //     var line = new this.three.Line(geometry, new this.three.LineBasicMaterial({
+                //         color: 0x000000,
+                //         opacity: 0.2
+                //     }));
+                //     line.position.z = (i * 50) - 500;
+                //     this.scene.add(line);
 
-                var line = new THREE.Line( geometry, material, THREE.LinePieces );
-                scene.add(line);
-            }
-             render()
-            {
-                renderer.clear();
-                renderer.render(scene, camera);
-                requestAnimationFrame(render);
-            }
-             threeStart() {
-                initThree();
-                initCamera();
-                initScene();
-                initLight();
-                initObject();
-                render();
-            }
+                //     var line = new this.three.Line(geometry, new this.three.LineBasicMaterial({
+                //         color: 0x000000,
+                //         opacity: 0.2
+                //     }));
+                //     line.position.x = (i * 50) - 500;
+                //     line.rotation.y = 90 * Math.PI / 180;
+                //     this.scene.add(line);
+                var geometry = new this.three.CylinderGeometry(100, 150, 400);
+                var material = new this.three.MeshLambertMaterial({
+                    color: 0xFFFF00
+                });
+                var mesh = new this.three.Mesh(geometry, material);
+                //mesh.position = new this.three.Vector3(0, 0, 0);
+                this.scene.add(mesh);
+
+            },
+            animation() {
+
+                  // mesh.position.x-=1;
+
+                this.camera.position.x = this.camera.position.x + 1;
+                this.renderer.render(this.scene, this.camera);
+                requestAnimationFrame(this.animation);
+               // stats.update()
+            },
+            // render() {
+            //     this.renderer.clear();
+            //     this.renderer.render(this.scene, this.camera);
+            //     requestAnimationFrame(this.render);
+            // },
+
+
 
         }
     }

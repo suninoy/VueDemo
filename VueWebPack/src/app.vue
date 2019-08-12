@@ -1,8 +1,8 @@
 <template>
   <div>
-     <mainMenu></mainMenu>
-    
-<router-view></router-view>
+    <mainMenu></mainMenu>
+
+    <router-view></router-view>
   </div>
 
 
@@ -13,12 +13,13 @@
   import mainMenu from './mainMenu.vue'
   import flexPage from './flexPage.vue'
   import three from './three.vue'
+  import webgldemo from './webgldemo.vue'
   export default {
     components: {
       mainMenu,
       eChartDemo,
       flexPage,
-      three
+      webgldemo
     }
 
   }

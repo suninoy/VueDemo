@@ -9,11 +9,13 @@ import './assets/images/bg.jpg'
 import './assets/styles/test-stylus.styl'
 import router from './router.js';
 import three from 'three.js';
+// import webgl from 'webgl';
 
 Vue.use(VueRouter)
 Vue.use(ElementUI);
 Vue.prototype.echarts = echarts ;
 Vue.prototype.three = three;
+//Vue.prototype.webgl = webgl;
 console.log(three)
 
 const root = document.createElement('div')
