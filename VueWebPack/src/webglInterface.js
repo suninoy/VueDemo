@@ -1,8 +1,6 @@
-
-
 import img from "./assets/images/4.jpg"
 export default {
-    
+
     click(e, gl, canvas, g_points, g_Colors, a_PointSize, a_Position, u_FragColor) {
         let x = e.clientX;
         let y = e.clientY;
@@ -148,13 +146,13 @@ export default {
         var texture = gl.createTexture(); //创建纹理对象
         var u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler');
         var image = new Image();
-        var loadTexture=function(gl, n, texture, u_Sampler, image) {
+        var loadTexture = function (gl, n, texture, u_Sampler, image) {
             gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1) //纹理图Y轴翻转
             gl.activeTexture(gl.TEXTURE0) //激活0号纹理单元
             gl.bindTexture(gl.TEXTURE_2D, texture) //向target绑定纹理对象
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,gl.LINEAR)//配置纹理参数
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image)//从片元着色器中获取纹理像素颜色
-            gl.uniform1i(u_Sampler, 0);//纹理单元传给片元着色器
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR) //配置纹理参数
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image) //从片元着色器中获取纹理像素颜色
+            gl.uniform1i(u_Sampler, 0); //纹理单元传给片元着色器
             gl.clear(gl.COLOR_BUFFER_BIT)
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, n)
 
@@ -162,12 +160,78 @@ export default {
         image.onload = function () {
 
             loadTexture(gl, n, texture, u_Sampler, image);
-           
+
         };
         image.src = img;
         return true;
 
 
+    },
+    initVertexBuffers3D(gl) {
+        // var verticesColors = new Float32Array([
+        //     0.5, 0.5, -0.4, 0.4, 1.0, 0.4,
+        //     -0.5, -0.5, -0.4, 0.4, 1.0, 0.4,
+        //     0.5, -0.5, -0.4, 1.0, 0.4, 0.4,
+        //     0.5, 0.4, -0.2, 1.0, 0.4, 0.4,
+        //     -0.5, 0.4, -0.2, 1.0, 1.0, 0.4,
+        //     0.0, -0.6, -0.2, 1.0, 1.0, 0.4,
+        //     0.0, 0.5, 0.0, 0.4, 0.4, 1.0,
+        //     -0.5, -0.5, 0.0, 0.4, 0.4, 1.0,
+        //     0.5, -0.5, 0.0, 1.0, 0.4, 0.4
+        // ]);
+        // var n=9;
+        var verticesColors = new Float32Array([
+            0.75, 1.0, -4.0, 0.4, 1.0, 0.4,
+            0.25, -1.0, -4.0, 0.4, 1.0, 0.4,
+            1.25, -1.0, -4.0, 1.0, 0.4, 0.4,
+
+            0.75, 1.0, -2.0, 1.0, 1.0, 0.4,
+            0.25, -1.0, -2.0, 1.0, 1.0, 0.4,
+            1.25, -1.0, -2.0, 1.0, 0.4, 0.4,
+
+            0.75, 1.0, 0.0, 0.4, 0.4, 1.0,
+            0.25, -1.0, 0.0, 0.4, 0.4, 1.0,
+            1.25, -1.0, 0.0, 1.0, 0.4, 0.4,
+ 
+
+            -0.75, 1.0, -4.0, 0.4, 1.0, 0.4,
+            -1.25, -1.0, -4.0, 1.0, 0.4, 0.4,
+            -0.25, -1.0, -4.0, 0.4, 1.0, 0.4,
+    
+
+            -0.75, 1.0, -2.0, 1.0, 1.0, 0.4,
+            -1.25, -1.0, -2.0, 1.0, 1.0, 0.4,
+            -0.25, -1.0, -2.0, 1.0, 0.4, 0.4,
+ 
+
+            -0.75, 1.0, 0.0,0.4, 0.4, 1.0,
+            -1.25, -1.0, 0.0, 0.4, 0.4, 1.0,
+            -0.25, -1.0, 0.0, 1.0, 0.4, 0.4,
+      
+
+            // 0.5, 0.4, -0.2, 1.0, 0.4, 0.4,
+            // -0.5, 0.4, -0.2, 1.0, 1.0, 0.4,
+            // 0.0, -0.6, -0.2, 1.0, 1.0, 0.4,
+            // 0.0, 0.5, 0.0, 0.4, 0.4, 1.0,
+            // -0.5, -0.5, 0.0, 0.4, 0.4, 1.0,
+            // 0.5, -0.5, 0.0, 1.0, 0.4, 0.4
+        ]);
+        var n = 18;
+        var vertexColorBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER,vertexColorBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER,verticesColors,gl.STATIC_DRAW);
+        var FSIZE = verticesColors.BYTES_PER_ELEMENT;
+        var a_Position = gl.getAttribLocation(gl.program, 'a_Position')
+        //分配缓冲区对象给a_Position（缓冲区对象的引用或指针）
+        gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 6, 0)
+        //激活attribute变量
+        gl.enableVertexAttribArray(a_Position);
+        var a_Color = gl.getAttribLocation(gl.program, 'a_Color')
+        //分配缓冲区对象给a_Position（缓冲区对象的引用或指针）
+        gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3)
+        //激活attribute变量
+        gl.enableVertexAttribArray(a_Color);
+        return n;
     }
 
 
